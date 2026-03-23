@@ -1,307 +1,173 @@
-# Motherless Downloader Browser Extension (Chrome, Firefox, Edge, Opera, Brave)
+# Motherless Downloader (Browser Extension)
 
+> Download supported Motherless videos as MP4 files directly from the browser.
 
-## Related
+Motherless Downloader is a browser extension for users who want a cleaner way to save Motherless videos without hunting for direct file URLs in page source. It detects supported media from active video pages, surfaces available quality options when present, and exports the result as MP4 for offline playback.
 
----
-<details>
-<summary>
-  Research
-</summary>
-# How to Download Motherless Videos: Technical Analysis of Stream Patterns, CDNs, and Download Methods
-*A comprehensive research document analyzing Motherless's video infrastructure, embed patterns, stream formats, and optimal download strategies using modern tools*
-**Authors**: SERP Apps  
-**Date**: December 2025  
-**Version**: 1.0
----
-- [Motherless Downloader gist](https://gist.github.com/devinschumacher/8634de51e22018329787aa173e55ecbe)
-## Abstract
+- Save supported Motherless videos from watch pages
+- Detect direct file and supported player-backed media flows
+- Export MP4 files for simpler offline playback
+- Avoid manual source inspection and copy-paste workflows
+- Keep everything inside the browser
 
-This document details Motherless watch pages, inline player configuration blocks, and CDN URL patterns for MP4 delivery.
+## Links
+
+- :rocket: Get it here: [Motherless Downloader](https://serp.ly/motherless-downloader)
+- :new: Latest release: [GitHub Releases](https://github.com/serpapps/motherless-downloader/releases/latest)
+- :question: Help center: [SERP Help](https://help.serp.co/en/)
+- :beetle: Report bugs: [GitHub Issues](https://github.com/serpapps/motherless-downloader/issues)
+- :bulb: Request features: [Feature Requests](https://github.com/serpapps/motherless-downloader/issues)
+
+## Preview
+
+![Motherless Downloader workflow preview](assets/workflow-preview.webp)
 
 ## Table of Contents
 
-1. [Introduction](#1-introduction)
-2. [Motherless Video Infrastructure Overview](#2-motherless-video-infrastructure-overview)
-3. [URL Patterns and Detection](#3-url-patterns-and-detection)
-4. [Stream Formats and CDN Analysis](#4-stream-formats-and-cdn-analysis)
-5. [yt-dlp Implementation Strategies](#5-yt-dlp-implementation-strategies)
-6. [FFmpeg Processing Techniques](#6-ffmpeg-processing-techniques)
-7. [Alternative Tools and Backup Methods](#7-alternative-tools-and-backup-methods)
-8. [Motherless API Integration](#8-motherless-api-integration)
-9. [Implementation Recommendations](#9-implementation-recommendations)
-10. [Troubleshooting and Edge Cases](#10-troubleshooting-and-edge-cases)
-11. [Conclusion](#11-conclusion)
+- [Why Motherless Downloader](#why-motherless-downloader)
+- [Features](#features)
+- [How It Works](#how-it-works)
+- [Step-by-Step Tutorial: How to Download Videos from Motherless](#step-by-step-tutorial-how-to-download-videos-from-motherless)
+- [Supported Formats](#supported-formats)
+- [Who It's For](#who-its-for)
+- [Common Use Cases](#common-use-cases)
+- [Troubleshooting](#troubleshooting)
+- [Trial & Access](#trial--access)
+- [Installation Instructions](#installation-instructions)
+- [FAQ](#faq)
+- [License](#license)
+- [Notes](#notes)
+- [About Motherless](#about-motherless)
 
----
+## Why Motherless Downloader
 
-## 1. Introduction
+Motherless often exposes video through player config blocks or direct CDN-backed file URLs, but that still does not make saving the correct file convenient. Generic tools can miss the real media source or leave you sorting through multiple irrelevant assets.
 
-Motherless hosts videos directly and exposes MP4 URLs in inline scripts or player configuration blocks. These URLs can be extracted and downloaded with standard tooling.
+Motherless Downloader is built to reduce that friction. Open the page, let the extension detect the active media source, choose the available quality, and export the result as MP4 without leaving the browser.
 
-### 1.1 Research Scope
+## Features
 
-- Motherless watch pages and embed links
-- Inline player config blocks and file URLs
-- CDN domains used for MP4 delivery
+- Detects supported Motherless media from active watch pages
+- Multi-source video detection including flashvars, HTML5 video, and inject script monitoring
+- Handles direct-file and supported player-backed download flows
+- In-page download button built into the video player
+- Lists available quality variants when present
+- Right-click context menu for quick downloads
+- Saves output as MP4 for broad playback compatibility
+- Automatic saving into a dedicated MOTHERLESS folder
+- Works on Chrome, Edge, Brave, Opera, Firefox, Whale, and Yandex
 
-### 1.2 Methodology
+## How It Works
 
-- Inspect HTML for setup({file: ...}) blocks
-- Capture direct MP4 requests from network logs
+1. Install the extension from the latest release.
+2. Open Motherless and visit a video page.
+3. Start playback so the extension can detect the stream.
+4. Open the popup or use the in-page download button.
+5. Choose the quality or stream option you want.
+6. Download the video as MP4.
+7. Save the final file locally.
 
----
+## Step-by-Step Tutorial: How to Download Videos from Motherless
 
-## 2. Motherless Video Infrastructure Overview
+1. Install Motherless Downloader from the latest GitHub release.
+2. Open Motherless and sign in if the page you want requires account access.
+3. Visit the video page you want to save.
+4. Let the player load fully and press play.
+5. Click the in-page download button on the player, or open the extension popup.
+6. Review the quality options shown by the extension.
+7. Choose the available quality if more than one option appears.
+8. Start the download and wait for the MP4 export to finish.
+9. Open the saved file from your Downloads folder.
 
-### 2.1 Video Hosting Types
+## Supported Formats
 
-- Direct MP4 hosting on CDN
-- Optional preview or trailer variants
+- Input: supported Motherless video sources (HLS, direct MP4)
+- Output: MP4
 
-### 2.2 CDN Architecture
+Saved files use MP4 so they are easier to replay on standard media players, move between devices, or archive locally.
 
-- videos.motherlessmedia.com and related CDN hosts
-- Static assets served from motherless.com
+## Who It's For
 
-### 2.3 Video Processing Pipeline
+- Motherless viewers who want offline copies of supported videos
+- Users archiving media they can already access in the browser
+- People who want a browser extension instead of manual URL extraction
+- Users who need a simple MP4 export workflow
+- Anyone who wants cleaner download controls than generic downloader sites
 
-1. User loads watch page
-2. HTML includes player config with file URL
-3. Client requests MP4 from CDN
+## Common Use Cases
 
-### 2.4 Access Control and Authentication
+- Save a Motherless video for later viewing
+- Export the available quality as MP4
+- Avoid manual parsing of page source for direct file URLs
+- Keep local copies for offline playback
+- Use the in-page button or right-click menu for a faster download flow
 
-- Most content is public
-- Some assets may require referer headers
+## Troubleshooting
 
----
+**The extension does not detect the video**
+Press play first and wait for the page to initialize the active source.
 
-## 3. URL Patterns and Detection
+**No quality selector appears**
+Some pages expose only one usable source, so only one option may be available.
 
-### 3.1 Watch Page URL Patterns
+**The detected stream looks incomplete**
+Refresh the page and retry after starting playback again.
 
-```
-https://motherless.com/<id>
-```
+**The download stopped partway through**
+Check whether your internet connection dropped during the download.
 
-### 3.2 Embed URL Patterns
+**The page requires account access**
+The extension only works on media you can already open and play in your active browser session.
 
-```
-https://motherless.com/iframe/<id>
-```
+## Trial & Access
 
-### 3.3 Direct Media and CDN URL Patterns
+- Includes **3 free downloads** so you can test the workflow first
+- Email sign-in uses secure one-time password verification
+- No credit card required for the trial
+- Unlimited downloads are available with a paid license
 
-```
-https://cdn*.motherlessmedia.com/videos/<id>.mp4
-```
+Start here: [https://serp.ly/motherless-downloader](https://serp.ly/motherless-downloader)
 
-### 3.4 Regex Patterns for URL Extraction
+## Installation Instructions
 
-```regex
-motherless\\.com/([A-Za-z0-9]+)
-file\\s*:\\s*['\\\"](https?://[^'\\\"]+\\.mp4)
-```
+1. Open the latest release page: [GitHub Releases](https://github.com/serpapps/motherless-downloader/releases/latest)
+2. Download the correct build for your browser.
+3. Install the extension.
+4. Open a Motherless watch page.
+5. Use the popup to detect and download the media.
 
-### 3.5 Command-line URL Extraction
+## FAQ
 
-```bash
-grep -oE "https?://[^'\" ]+\.mp4" page.html | sort -u
-```
+**Can I download Motherless videos as MP4?**
+Yes. Supported videos are exported as MP4 files.
 
----
+**Do I need extra software?**
+No. The workflow stays inside the browser extension.
 
-## 4. Stream Formats and CDN Analysis
+**Where are videos saved?**
+They are saved to your default Downloads location, typically inside a MOTHERLESS subfolder.
 
-### 4.1 Stream Formats
+**What quality options are available?**
+The extension detects all available qualities from the source. Formats are sorted by quality with MP4 preferred over HLS.
 
-| Format | Extension | Notes |
-|--------|-----------|-------|
-| MP4 (progressive) | .mp4 | Direct file URLs from CDN |
+**Does this work on Firefox?**
+Yes. It supports Chrome, Edge, Brave, Opera, Whale, Yandex, and Firefox.
 
-### 4.2 Typical Quality Ladder
+**Will it work on every page?**
+It works on supported playback flows. Detection depends on how the current page exposes the media.
 
-| Quality | Typical Resolution | Notes |
-|---------|--------------------|-------|
-| Low | 360p - 480p | Fast preview streams or mobile variants |
-| Medium | 720p | Common default for web playback |
-| High | 1080p+ | Available when source uploads are higher quality |
+## License
 
-### 4.3 CDN URL Construction and Query Parameters
+This repository is distributed under the proprietary SERP Apps license in the [LICENSE](LICENSE) file. Review that file before copying, modifying, or redistributing any part of this project.
 
-- File URL is commonly embedded in HTML
-- CDN hostnames vary by region
+## Notes
 
-### 4.4 Validation and Inspection Commands
+- Only download content you own or have explicit permission to save
+- An internet connection is required for downloads
+- Must press play before the extension can detect the video stream
+- Quality depends on the media exposed by Motherless
+- Source quality varies by upload since Motherless hosts user-submitted content
 
-```bash
-ffprobe -hide_banner -show_streams "video.mp4"
-```
+## About Motherless
 
----
-
-## 5. yt-dlp Implementation Strategies
-
-yt-dlp can download watch URLs if supported, or use direct MP4 URLs extracted from HTML.
-
-### 5.1 Basic Usage
-
-```bash
-yt-dlp [OPTIONS] [--] URL [URL...]
-yt-dlp -F "https://example.com/watch/123"
-```
-
-### 5.2 Authentication and Cookies
-
-- Pass referer headers for CDN downloads if needed
-
-### 5.3 Format Selection and Output Templates
-
-```bash
-yt-dlp -f bestvideo+bestaudio/best "URL"
-yt-dlp -o "%(title)s.%(ext)s" "URL"
-yt-dlp --download-archive archive.txt "URL"
-```
-
-### 5.4 Site-Specific Examples
-
-```bash
-yt-dlp "https://motherless.com/<id>"
-yt-dlp "https://cdn*.motherlessmedia.com/videos/<id>.mp4"
-```
-
-### 5.5 Batch and Archive Mode
-
-```bash
-yt-dlp -a urls.txt --download-archive archive.txt
-yt-dlp --no-overwrites --continue "URL"
-```
-
-### 5.6 Error Handling Patterns
-
-- Use --add-header 'Referer: https://motherless.com/' if 403 occurs
-
----
-
-## 6. FFmpeg Processing Techniques
-
-FFmpeg is mainly used for validation or remuxing in case of partial downloads.
-
-### 6.1 Inspect and Validate Streams
-
-```bash
-ffprobe -hide_banner -i "https://cdn*.motherlessmedia.com/videos/<id>.mp4"
-```
-
-### 6.2 Common Remux and Repair Patterns
-
-```bash
-ffmpeg -i "playlist.m3u8" -c copy output.mp4
-ffmpeg -i input.mp4 -c copy -movflags +faststart output.mp4
-ffprobe -hide_banner -show_streams output.mp4
-```
-
----
-
-## 7. Alternative Tools and Backup Methods
-
-### 7.1 Streamlink
-
-```bash
-streamlink "https://motherless.com/<id>" best -o output.mp4
-```
-
-### 7.2 aria2c
-
-```bash
-aria2c -o video.mp4 "https://cdn*.motherlessmedia.com/videos/<id>.mp4"
-```
-
-### 7.3 gallery-dl
-
-```bash
-gallery-dl "https://motherless.com/<id>"
-```
-
-### 7.4 Browser DevTools
-
-- Search HTML for file: 'https://...mp4'
-- Check Network for MP4 requests
-
----
-
-## 8. Motherless API Integration
-
-### 8.1 Known Endpoints
-
-- None documented; rely on page and player data extraction
-
-### 8.2 Example Requests
-
-```
-# No public API calls identified; extract URLs from HTML/player data
-```
-
-### 8.3 Token and Session Handling
-
-- No public API documented
-
----
-
-## 9. Implementation Recommendations
-
-### 9.1 Detection Hierarchy
-
-- Parse HTML for direct MP4 file URL
-- Fallback to network capture
-
-### 9.2 Site-Specific Notes
-
-- Surface download button when file URL is detected
-
-### 9.3 Storage and Naming Strategy
-
-- Use the Motherless ID as part of filename
-
----
-
-## 10. Troubleshooting and Edge Cases
-
-- Some pages load player data via XHR; capture if HTML lacks file URL
-
----
-
-## 11. Conclusion
-
-Motherless exposes direct MP4 URLs in HTML or inline player config. Use HTML parsing first and fall back to network capture for resilient downloads.
-
-| Tool | Best Use Case | Notes |
-|------|---------------|-------|
-| yt-dlp | Primary downloader for MP4/HLS | Supports cookies, format selection, retries |
-| ffmpeg | Remuxing and validation | Useful for HLS to MP4 conversion |
-| streamlink | Live/HLS fallback | Streams to file or pipes into ffmpeg |
-| aria2c | Multi-connection HTTP/HLS downloads | Good for large files and retries |
-| gallery-dl | Image-first or gallery-heavy sites | Best for gallery or attachment extraction |
-
-
----
-
-## Disclaimer and Ethical Use
-
-This document is provided for lawful, personal, or authorized use cases only. Always respect the site terms of service, content creator rights, and applicable laws. If DRM or explicit access controls are present, do not attempt to bypass them; use official downloads or creator-provided access instead.
-
-## Last Updated
-
-December 2025
-
-## Next Review
-
-90 days from last update or when site playback changes are observed.
-
-## Related
-
-- SERP Apps research index (internal)
-- SERP extension downloaders (internal)
-
-</details>
+Motherless is a video platform that can expose direct media files through player setup or CDN delivery. Motherless Downloader is built to make supported downloads easier for users who already have access to that content in the browser.
