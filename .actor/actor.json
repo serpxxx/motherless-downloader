@@ -5,6 +5,6 @@
   "input": "./INPUT_SCHEMA.json",
   "name": "motherless-downloader",
   "readme": "../ACTOR.md",
-  "title": "Motherless Downloader Browser Extension",
+  "title": "Motherless Downloader",
   "version": "0.0"
 }
