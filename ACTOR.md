@@ -1,4 +1,4 @@
-# Motherless Downloader Browser Extension
+# Motherless Downloader
 
 > Download supported Motherless videos as MP4 files directly from the browser.
 
