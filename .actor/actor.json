@@ -1,10 +1,10 @@
 {
   "actorSpecification": 1,
   "buildTag": "latest",
-  "description": "Motherless Downloader gives creators and teams a dependable way to save Motherless videos for offline access. Instead of juggling manual captures or risky browser extensions, it pulls publicly accessible files directly from Motherless with consistent quality.\n\nUse it to archive research material, prep client deliverables, or keep your personal library available when you're traveling or working with limited connectivity.",
+  "description": "Motherless Downloader helps users save accessible videos for authorized offline viewing.",
   "input": "./INPUT_SCHEMA.json",
   "name": "motherless-downloader",
   "readme": "../ACTOR.md",
-  "title": "Motherless Downloader",
+  "title": "Motherless Video Downloader | How to Download Motherless Videos",
   "version": "0.0"
 }
