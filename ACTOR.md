@@ -1,6 +1,10 @@
-# Motherless Downloader
+# Motherless Video Downloader | How to Download Motherless Videos
 
 > Download supported Motherless videos as MP4 files directly from the browser.
+
+## Get it Here
+
+Get it here: https://serp.ly/motherless-downloader
 
 ![Motherless Downloader](https://raw.githubusercontent.com/serpxxx/motherless-downloader/main/assets/workflow-preview.webp)
 
@@ -11,11 +15,6 @@ Motherless Downloader is a browser extension for users who want a cleaner way to
 - Export MP4 files for simpler offline playback
 - Avoid manual source inspection and copy-paste workflows
 - Keep everything inside the browser
-
-## Get it Here
-
-Get it here: https://serp.ly/motherless-downloader
-
 ## Table of Contents
 
 - [Why Motherless Downloader](#why-motherless-downloader)
